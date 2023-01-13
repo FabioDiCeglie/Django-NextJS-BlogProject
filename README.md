@@ -1,1 +1,1 @@
-## Full stack application Python-React
+## Full stack application Python-NextJS

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework import generics
@@ -24,6 +24,25 @@ def article_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@csrf_exempt
+def article_details(request, pk):
+    try:
+        article = Article.objects.get(pk=pk)
+
+    except Article.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == "GET":
+        serializer = ArticleSerialize(article)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == "PUT":
+        data = JSONParser().parse(request)
+        serializer = ArticleSerialize(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 # class ArticleView(generics.ListAPIView):
 #     queryset = Article.objects.all()
