@@ -6,22 +6,33 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.decorators import APIView
 from rest_framework import status
+from rest_framework import generics
+from rest_framework import mixins
 from .models import Article
 from .serializers import ArticleSerialize
 
 # Create your views here.
-class ArticleList(APIView):
+class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerialize
     def get(self,request):
-        articles = Article.objects.all()
-        serializer = ArticleSerialize(articles, many=True)
-        return Response(serializer.data)
+        return self.list(request)
 
-    def post (self, request):
-        serializer = ArticleSerialize(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def post(self,request):
+        return self.create(request)
+
+# class ArticleList(APIView):
+#     def get(self,request):
+#         articles = Article.objects.all()
+#         serializer = ArticleSerialize(articles, many=True)
+#         return Response(serializer.data)
+
+#     def post (self, request):
+#         serializer = ArticleSerialize(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ArticleDetails(APIView):
 
