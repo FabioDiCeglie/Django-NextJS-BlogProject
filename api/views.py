@@ -21,6 +21,19 @@ class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateM
     def post(self,request):
         return self.create(request)
 
+class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    queryset = Article.objects.all()
+    serializer_class = ArticleSerialize
+
+    def get_object(self,request,id):
+        return self.retrieve(request, id=id)
+
+    def put(self,request,id):
+        return self.update(request,id=id)
+
+    def delete(self,request,id):
+        return self.destroy(request,id=id)
+
 # class ArticleList(APIView):
 #     def get(self,request):
 #         articles = Article.objects.all()
@@ -34,33 +47,33 @@ class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateM
 #             return Response(serializer.data, status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ArticleDetails(APIView):
+# class ArticleDetails(APIView):
 
-    def get_object(self,id):
-        print(id)
-        try:
-            return Article.objects.get(id=id)
+    # def get_object(self,id):
+    #     print(id)
+    #     try:
+    #         return Article.objects.get(id=id)
 
-        except Article.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+    #     except Article.DoesNotExist:
+    #         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    def get(self,request, id):
-        article = self.get_object(id)
-        serializer = ArticleSerialize(article)
-        return Response(serializer.data)
+    # def get(self,request, id):
+    #     article = self.get_object(id)
+    #     serializer = ArticleSerialize(article)
+    #     return Response(serializer.data)
 
-    def put(self,request,id):
-        article = self.get_object(id)
-        serializer = ArticleSerialize(article, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # def put(self,request,id):
+    #     article = self.get_object(id)
+    #     serializer = ArticleSerialize(article, data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self,request,id):
-        article = self.get_object(id)
-        article.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+    # def delete(self,request,id):
+    #     article = self.get_object(id)
+    #     article.delete()
+    #     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 
 
