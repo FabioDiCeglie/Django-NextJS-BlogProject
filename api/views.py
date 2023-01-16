@@ -24,8 +24,9 @@ class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateM
 class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
     queryset = Article.objects.all()
     serializer_class = ArticleSerialize
+    lookup_field = 'id'
 
-    def get_object(self,request,id):
+    def get(self,request,id):
         return self.retrieve(request, id=id)
 
     def put(self,request,id):
