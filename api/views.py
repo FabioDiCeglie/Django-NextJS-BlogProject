@@ -3,18 +3,19 @@ from .models import Article
 from .serializers import ArticleSerialize
 
 # Create your views here.
+# ------------------------------------------------------------------- ModelViewSet
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerialize
 
-# -------------------------------------------------------------------
+# ------------------------------------------------------------------- GenericViewSet + Mixin
 
 # class ArticleViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
 #     queryset = Article.objects.all()
 #     serializer_class = ArticleSerialize
 
 
-# -------------------------------------------------------------------
+# ------------------------------------------------------------------- ViewSet
 
 # class ArticleViewSet(viewsets.ViewSet):
 #     def list(self,request):
