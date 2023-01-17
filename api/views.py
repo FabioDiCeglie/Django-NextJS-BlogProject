@@ -42,6 +42,10 @@ class ArticleViewSet(viewsets.ViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def destroy(self,request,pk=pk):
+        article = Article.objects.get(pk=pk)
+        article.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
