@@ -33,28 +33,45 @@ class ArticleViewSet(viewsets.ViewSet):
         serializer = ArticleSerialize(article)
         return Response(serializer.data)
 
-class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerialize
-    def get(self,request):
-        return self.list(request)
+    def update(self,request,pk=None):
+        article = Article.objects.get(pk=pk)
 
-    def post(self,request):
-        return self.create(request)
+        serializer = ArticleSerialize(article, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    queryset = Article.objects.all()
-    serializer_class = ArticleSerialize
-    lookup_field = 'id'
 
-    def get(self,request,id):
-        return self.retrieve(request, id=id)
 
-    def put(self,request,id):
-        return self.update(request,id=id)
 
-    def delete(self,request,id):
-        return self.destroy(request,id=id)
+# -------------------------------------------------------------------
+
+# class ArticleList(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerialize
+#     def get(self,request):
+#         return self.list(request)
+
+#     def post(self,request):
+#         return self.create(request)
+
+# class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+#     queryset = Article.objects.all()
+#     serializer_class = ArticleSerialize
+#     lookup_field = 'id'
+
+#     def get(self,request,id):
+#         return self.retrieve(request, id=id)
+
+#     def put(self,request,id):
+#         return self.update(request,id=id)
+
+#     def delete(self,request,id):
+#         return self.destroy(request,id=id)
+
+
+# -------------------------------------------------------
 
 # class ArticleList(APIView):
 #     def get(self,request):
@@ -98,6 +115,7 @@ class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.
     #     return HttpResponse(status=status.HTTP_204_NO_CONTENT)
 
 
+# -------------------------------------------------------
 
 # @api_view(["GET", "POST"])
 # def article_list(request):
@@ -136,6 +154,8 @@ class ArticleDetails(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.
 #     elif request.method == "DELETE":
 #         article.delete()
 #         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+# -------------------------------------------------------
 
 # @csrf_exempt
 # def article_list(request):
