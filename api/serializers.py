@@ -7,6 +7,8 @@ class ArticleSerialize(serializers.ModelSerializer):
         model = Article
         fields = ["id", "title", "description"]
 
+# -------------------------------------------------------------------
+
 #second way with Serializer
 # class ArticleSerialize(serializers.Serializer):
 #     title = serializers.CharField(max_length=100)
