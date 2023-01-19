@@ -1,20 +1,19 @@
+import Head from "next/head";
 import Container from "../components/container";
-import MoreStories from "../components/more-stories";
 import HeroPost from "../components/hero-post";
 import Intro from "../components/intro";
 import Layout from "../components/layout";
-import { getAllPosts } from "../lib/api";
-import Head from "next/head";
-import { CMS_NAME } from "../lib/constants";
+import MoreStories from "../components/more-stories";
 import Post from "../interfaces/post";
+import { getAllPosts } from "../lib/api";
 
 type Props = {
   allPosts: Post[];
 };
 
 export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0];
-  const morePosts = allPosts.slice(1);
+  const mainArticle = allPosts[0];
+  const moreArticles = allPosts.slice(1);
   return (
     <>
       <Layout>
@@ -23,17 +22,17 @@ export default function Index({ allPosts }: Props) {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
+          {mainArticle && (
             <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+              title={mainArticle.title}
+              coverImage={mainArticle.coverImage}
+              date={mainArticle.date}
+              author={mainArticle.author}
+              slug={mainArticle.slug}
+              excerpt={mainArticle.excerpt}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {moreArticles.length > 0 && <MoreStories posts={moreArticles} />}
         </Container>
       </Layout>
     </>
@@ -41,7 +40,7 @@ export default function Index({ allPosts }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
+  const allArticles = getAllPosts([
     "title",
     "date",
     "slug",
@@ -51,6 +50,6 @@ export const getStaticProps = async () => {
   ]);
 
   return {
-    props: { allPosts },
+    props: { allPosts: allArticles },
   };
 };
