@@ -1,16 +1,21 @@
 from rest_framework import viewsets
 from .models import Article
-from .serializers import ArticleSerialize
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication,TokenAuthentication
+from .serializers import ArticleSerializer,UserSerializer
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 
 # Create your views here.
 # ------------------------------------------------------------------- ModelViewSet
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerialize
+    serializer_class = ArticleSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 # ------------------------------------------------------------------- GenericViewSet + Mixin
 
