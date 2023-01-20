@@ -5,7 +5,6 @@ type Post = {
   coverImage: string;
   author_name: string;
   author_picture: string;
-  image_article: string;
   description: string;
 };
 

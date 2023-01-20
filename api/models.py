@@ -8,6 +8,5 @@ class Article(models.Model):
     date = models.DateTimeField(auto_now=True)
     author_name = models.CharField(max_length=100, default="")
     author_picture = models.CharField(max_length=300,default="")
-    image_article = models.URLField(default="")
     description = models.TextField(default="")
 
