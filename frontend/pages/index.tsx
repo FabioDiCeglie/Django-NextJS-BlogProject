@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import MoreStories from "../components/more-stories";
 import Post from "../interfaces/post";
 import { getAllPosts } from "../lib/api";
+import { getAllArticles } from "../lib/python_api";
 
 type Props = {
   allPosts: Post[];
@@ -13,6 +14,7 @@ type Props = {
 
 export default function Index({ allPosts }: Props) {
   const mainArticle = allPosts[0];
+  console.log(mainArticle);
   const moreArticles = allPosts.slice(1);
   return (
     <>
@@ -27,9 +29,8 @@ export default function Index({ allPosts }: Props) {
               title={mainArticle.title}
               coverImage={mainArticle.coverImage}
               date={mainArticle.date}
-              author={mainArticle.author}
-              slug={mainArticle.slug}
-              excerpt={mainArticle.excerpt}
+              author_name={mainArticle.author_name}
+              author_image={mainArticle.author_image}
             />
           )}
           {moreArticles.length > 0 && <MoreStories posts={moreArticles} />}
@@ -49,7 +50,10 @@ export const getStaticProps = async () => {
     "excerpt",
   ]);
 
+  const posts = await getAllArticles();
+  console.log(posts);
+
   return {
-    props: { allPosts: allArticles },
+    props: { allPosts: posts },
   };
 };
