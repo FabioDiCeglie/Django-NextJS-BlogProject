@@ -1,6 +1,5 @@
-import type Author from "./author";
-
 type PostType = {
+  id: string;
   title: string;
   date: string;
   coverImage: string;
