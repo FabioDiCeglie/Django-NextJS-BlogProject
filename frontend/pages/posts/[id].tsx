@@ -1,28 +1,26 @@
-import { useRouter } from "next/router";
 import ErrorPage from "next/error";
-import Container from "../../components/container";
-import PostBody from "../../components/post-body";
-import Header from "../../components/header";
-import PostHeader from "../../components/post-header";
-import Layout from "../../components/layout";
-import { getPostBySlug, getAllPosts } from "../../lib/api";
-import PostTitle from "../../components/post-title";
 import Head from "next/head";
-import { CMS_NAME } from "../../lib/constants";
-import markdownToHtml from "../../lib/markdownToHtml";
+import { useRouter } from "next/router";
+import Container from "../../components/container";
+import Header from "../../components/header";
+import Layout from "../../components/layout";
+import PostBody from "../../components/post-body";
+import PostHeader from "../../components/post-header";
+import PostTitle from "../../components/post-title";
 import type Post from "../../interfaces/post";
+import markdownToHtml from "../../lib/markdownToHtml";
+import { getAllArticles, getArticle } from "../../lib/python_api";
 
 type Props = {
   post: Post;
-  morePosts: Post[];
   preview?: boolean;
 };
 
-export default function Post({ post, morePosts, preview }: Props) {
+export default function Post({ post, preview }: Props) {
   const router = useRouter();
-  // if (!router.isFallback && !post?.slug) {
-  //   return <ErrorPage statusCode={404} />;
-  // }
+  if (!router.isFallback && !post?.id) {
+    return <ErrorPage statusCode={404} />;
+  }
   return (
     <Layout preview={preview}>
       <Container>
@@ -33,9 +31,7 @@ export default function Post({ post, morePosts, preview }: Props) {
           <>
             <article className="mb-32">
               <Head>
-                <title>
-                  {post.title} | Next.js Blog Example with {CMS_NAME}
-                </title>
+                <title>{post.title}</title>
                 <meta property="og:image" content={post.image_article} />
               </Head>
               <PostHeader
@@ -56,20 +52,12 @@ export default function Post({ post, morePosts, preview }: Props) {
 
 type Params = {
   params: {
-    slug: string;
+    id: string;
   };
 };
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
-    "title",
-    "date",
-    "slug",
-    "author",
-    "content",
-    "ogImage",
-    "coverImage",
-  ]);
+  const post = await getArticle(params.id);
   const content = await markdownToHtml(post.content || "");
 
   return {
@@ -83,13 +71,12 @@ export async function getStaticProps({ params }: Params) {
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(["slug"]);
-
+  const articles = await getAllArticles();
   return {
-    paths: posts.map((post) => {
+    paths: articles.map((article: Post) => {
       return {
         params: {
-          slug: post.slug,
+          id: article.id.toString(),
         },
       };
     }),

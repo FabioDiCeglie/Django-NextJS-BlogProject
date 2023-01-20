@@ -18,6 +18,7 @@ const HeroPost = ({ mainArticle }: Props) => {
     coverImage,
     description,
   } = mainArticle;
+
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -28,7 +29,7 @@ const HeroPost = ({ mainArticle }: Props) => {
           <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
             <Link
               as={`/posts/${id}`}
-              href="/posts/[slug]"
+              href="/posts/[id]"
               className="hover:underline"
             >
               {title}
