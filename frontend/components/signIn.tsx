@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { login } from "../lib/python_api";
-import Link from "next/link";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
@@ -57,16 +56,10 @@ export default function SignIn() {
               <p className="text-sm font-semibold mt-4 pt-1 mb-0 ">
                 Don't have an account?
                 <a
-                  href="#!"
+                  href="/signup"
                   className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
                 >
-                  <Link
-                    as={`/signup`}
-                    href="/signup"
-                    className="hover:underline"
-                  >
-                    Register
-                  </Link>
+                  Register
                 </a>
               </p>
             </form>
