@@ -1,11 +1,11 @@
 import Link from "next/link";
-import PostType from "../interfaces/post";
+import Post from "../interfaces/post";
 import Avatar from "./avatar";
 import DateFormatter from "./date-formatter";
 import CoverImage from "./cover-image";
 
 type Props = {
-  mainArticle: PostType;
+  mainArticle: Post;
 };
 
 const HeroPost = ({ mainArticle }: Props) => {

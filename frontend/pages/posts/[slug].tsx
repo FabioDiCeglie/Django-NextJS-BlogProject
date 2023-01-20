@@ -10,11 +10,11 @@ import PostTitle from "../../components/post-title";
 import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
-import type PostType from "../../interfaces/post";
+import type Post from "../../interfaces/post";
 
 type Props = {
-  post: PostType;
-  morePosts: PostType[];
+  post: Post;
+  morePosts: Post[];
   preview?: boolean;
 };
 

@@ -6,14 +6,13 @@ import Layout from "../components/layout";
 import MoreStories from "../components/more-stories";
 import Post from "../interfaces/post";
 import { getAllArticles } from "../lib/python_api";
-
 type Props = {
-  allPosts: Post[];
+  allArticles: Post[];
 };
 
-export default function Index({ allPosts }: Props) {
-  const mainArticle = allPosts[0];
-  const moreArticles = allPosts.slice(1);
+export default function Index({ allArticles }: Props) {
+  const mainArticle = allArticles[0];
+  const moreArticles = allArticles.slice(1);
   return (
     <>
       <Layout>
@@ -31,9 +30,9 @@ export default function Index({ allPosts }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const allArticles = await getAllArticles();
+  const articles = await getAllArticles();
 
   return {
-    props: { allPosts: allArticles },
+    props: { allArticles: articles },
   };
 };
