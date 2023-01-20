@@ -22,7 +22,7 @@ export default function Index({ allArticles }: Props) {
         <Container>
           <Intro />
           {mainArticle && <HeroPost mainArticle={mainArticle} />}
-          {moreArticles.length > 0 && <MoreStories posts={moreArticles} />}
+          {moreArticles.length > 0 && <MoreStories articles={moreArticles} />}
         </Container>
       </Layout>
     </>

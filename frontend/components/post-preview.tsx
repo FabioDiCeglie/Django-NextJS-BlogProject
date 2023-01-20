@@ -1,8 +1,7 @@
-import Avatar from "./avatar";
-import DateFormatter from "./date-formatter";
-import CoverImage from "./cover-image";
 import Link from "next/link";
-import type Author from "../interfaces/author";
+import Avatar from "./avatar";
+import CoverImage from "./cover-image";
+import DateFormatter from "./date-formatter";
 
 type Props = {
   title: string;
@@ -11,6 +10,7 @@ type Props = {
   author_name: string;
   author_picture: string;
   id: string;
+  description: string;
 };
 
 const PostPreview = ({
@@ -19,6 +19,7 @@ const PostPreview = ({
   date,
   author_name,
   author_picture,
+  description,
   id,
 }: Props) => {
   return (

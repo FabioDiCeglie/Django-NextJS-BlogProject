@@ -18,7 +18,6 @@ const HeroPost = ({ mainArticle }: Props) => {
     coverImage,
     description,
   } = mainArticle;
-
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -36,7 +35,7 @@ const HeroPost = ({ mainArticle }: Props) => {
             </Link>
           </h3>
           <div className="mb-4 md:mb-0 text-lg">
-            {/* <DateFormatter dateString={date} /> */}
+            <DateFormatter dateString={date} />
           </div>
         </div>
         <div>
