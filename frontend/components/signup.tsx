@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { login } from "../lib/python_api";
 import Link from "next/link";
+import { useState } from "react";
+import { createUser } from "../lib/python_api";
 
-export default function SignIn() {
+export default function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const submitForm = (e) => {
     e.preventDefault();
-    login(username, password);
+    createUser(username, password);
   };
   return (
     <section className="h-screen">
@@ -52,20 +52,16 @@ export default function SignIn() {
                 data-mdb-ripple-color="light"
                 onClick={(e) => submitForm(e)}
               >
-                Sign in
+                Sign Up
               </button>
               <p className="text-sm font-semibold mt-4 pt-1 mb-0 ">
-                Don't have an account?
+                You have an account?
                 <a
                   href="#!"
                   className="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out ml-2"
                 >
-                  <Link
-                    as={`/signup`}
-                    href="/signup"
-                    className="hover:underline"
-                  >
-                    Register
+                  <Link as={`/login`} href="/login" className="hover:underline">
+                    Log In
                   </Link>
                 </a>
               </p>
