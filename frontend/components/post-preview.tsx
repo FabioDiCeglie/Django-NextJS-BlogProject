@@ -25,7 +25,7 @@ const PostPreview = ({
   return (
     <div>
       <div className="mb-5">
-        <CoverImage slug={id} title={title} src={coverImage} />
+        <CoverImage id={id} title={title} src={coverImage} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link
