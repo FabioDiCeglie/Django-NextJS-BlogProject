@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createUser } from "../lib/python_api";
+import { login } from "../lib/python_api";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
@@ -7,7 +7,7 @@ export default function SignIn() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    createUser(username, password).catch((error) => console.log(error));
+    login(username, password);
   };
   return (
     <section className="h-screen">

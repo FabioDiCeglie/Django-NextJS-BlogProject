@@ -9,8 +9,14 @@ export const getArticle = async (id: string) => {
   const post = await axios.get(`http://localhost:8000/api/articles/${id}`);
   return post.data;
 };
-const headers = {
-  "Content-Type": "application/json",
+
+export const login = async (username: string, password: string) => {
+  const login = await axios.post(`http://localhost:8000/auth/`, {
+    username,
+    password,
+  });
+  console.log(login.data);
+  return login.data;
 };
 
 export const createUser = async (username: string, password: string) => {
@@ -18,6 +24,6 @@ export const createUser = async (username: string, password: string) => {
     username,
     password,
   });
-  console.log(createUser);
-  return createUser;
+
+  return createUser.data;
 };
