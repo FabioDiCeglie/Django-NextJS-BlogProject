@@ -5,8 +5,9 @@ export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitForm = () => {
-    createUser(username, password);
+  const submitForm = (e) => {
+    e.preventDefault();
+    createUser(username, password).catch((error) => console.log(error));
   };
   return (
     <section className="h-screen">
@@ -20,7 +21,7 @@ export default function SignIn() {
             />
           </div>
           <div className="md:w-8/12 lg:w-5/12 lg:ml-20">
-            <form onSubmit={submitForm}>
+            <form>
               <div className="mb-6">
                 <input
                   type="text"
@@ -48,6 +49,7 @@ export default function SignIn() {
                 className="inline-block px-7 py-3 bg-black text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
+                onClick={(e) => submitForm(e)}
               >
                 Sign in
               </button>
