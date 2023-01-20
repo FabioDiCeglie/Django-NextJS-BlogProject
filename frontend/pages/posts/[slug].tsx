@@ -20,9 +20,9 @@ type Props = {
 
 export default function Post({ post, morePosts, preview }: Props) {
   const router = useRouter();
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
-  }
+  // if (!router.isFallback && !post?.slug) {
+  //   return <ErrorPage statusCode={404} />;
+  // }
   return (
     <Layout preview={preview}>
       <Container>
@@ -36,15 +36,16 @@ export default function Post({ post, morePosts, preview }: Props) {
                 <title>
                   {post.title} | Next.js Blog Example with {CMS_NAME}
                 </title>
-                <meta property="og:image" content={post.ogImage.url} />
+                <meta property="og:image" content={post.image_article} />
               </Head>
               <PostHeader
                 title={post.title}
                 coverImage={post.coverImage}
                 date={post.date}
-                author={post.author}
+                author_name={post.author_name}
+                author_picture={post.author_picture}
               />
-              <PostBody content={post.content} />
+              <PostBody content={post.description} />
             </article>
           </>
         )}

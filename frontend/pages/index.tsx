@@ -30,7 +30,7 @@ export default function Index({ allPosts }: Props) {
               coverImage={mainArticle.coverImage}
               date={mainArticle.date}
               author_name={mainArticle.author_name}
-              author_image={mainArticle.author_image}
+              author_image={mainArticle.author_picture}
             />
           )}
           {moreArticles.length > 0 && <MoreStories posts={moreArticles} />}
