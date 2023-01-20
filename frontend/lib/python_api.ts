@@ -9,3 +9,11 @@ export const getArticle = async (id: string) => {
   const post = await axios.get(`http://localhost:8000/api/articles/${id}`);
   return post.data;
 };
+
+export const createUser = async (username: string, password: string) => {
+  const createUser = await axios.post(`http://localhost:8000/api/users/`, {
+    username,
+    password,
+  });
+  return createUser;
+};
