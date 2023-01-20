@@ -3,7 +3,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "physicsworld.com",
+        hostname: "**",
       },
     ],
   },
