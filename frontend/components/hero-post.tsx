@@ -28,8 +28,8 @@ const HeroPost = ({ mainArticle }: Props) => {
         <div>
           <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
             <Link
-              as={`/posts/${id}`}
-              href="/posts/[id]"
+              as={`/articles/${id}`}
+              href="/articles/[id]"
               className="hover:underline"
             >
               {title}

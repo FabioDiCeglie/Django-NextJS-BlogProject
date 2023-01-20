@@ -17,8 +17,8 @@ const PostPreview = ({ article }: Props) => {
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link
-          as={`/posts/${id}`}
-          href="/posts/[id]"
+          as={`/articles/${id}`}
+          href="/articles/[id]"
           className="hover:underline"
         >
           {title}
