@@ -59,7 +59,6 @@ type Params = {
 export async function getStaticProps({ params }: Params) {
   const post = await getArticle(params.id);
   const content = await markdownToHtml(post.content || "");
-
   return {
     props: {
       post: {
