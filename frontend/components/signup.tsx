@@ -1,14 +1,26 @@
-import { useState } from "react";
-import { createUser } from "../lib/python_api";
+import { useEffect, useState } from "react";
+import { createUser, login } from "../lib/python_api";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 export default function SignUp() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useCookies(["mytoken"]);
 
   const submitForm = (e) => {
     e.preventDefault();
-    createUser(username, password);
+    createUser(username, password).then(() =>
+      login(username, password).then((resp) => setToken("mytoken", resp.token))
+    );
   };
+
+  useEffect(() => {
+    if (token["mytoken"]) {
+      router.push("/");
+    }
+  }, [token]);
   return (
     <section className="h-screen">
       <div className="container px-6 py-12 h-full">
