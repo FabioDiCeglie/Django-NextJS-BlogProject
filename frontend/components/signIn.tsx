@@ -1,15 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../lib/python_api";
 import { useCookies } from "react-cookie";
+import { useRouter } from "next/router";
 
 export default function SignIn() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [token, setToken] = useCookies(["mytoken"]);
 
+  useEffect(() => {
+    if (token["mytoken"]) {
+      router.push("/");
+    }
+  }, [token]);
+
   const submitForm = (e) => {
     e.preventDefault();
-    login(username, password).then((resp) => setToken("mytoken", resp));
+    login(username, password).then((resp) => setToken("mytoken", resp.token));
   };
 
   return (

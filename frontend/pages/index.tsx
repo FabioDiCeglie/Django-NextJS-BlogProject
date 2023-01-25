@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import MoreStories from "../components/more-stories";
 import Post from "../interfaces/post";
 import { getAllArticles } from "../lib/python_api";
+
 type Props = {
   allArticles: Post[];
 };
