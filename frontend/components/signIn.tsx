@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { login } from "../lib/python_api";
+import { useCookies } from "react-cookie";
 
 export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useCookies(["mytoken"]);
 
   const submitForm = (e) => {
     e.preventDefault();
-    login(username, password);
+    login(username, password).then((resp) => setToken("mytoken", resp));
   };
+
   return (
     <section className="h-screen">
       <div className="container px-6 py-12 h-full">
