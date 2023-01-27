@@ -26,5 +26,5 @@ type ArticlesResult {
 
 type Query {
   listArticles: ArticlesResult!
-  getPost(id: ID!): ArticleResult!
+  getArticle(id: ID!): ArticleResult!
 }
