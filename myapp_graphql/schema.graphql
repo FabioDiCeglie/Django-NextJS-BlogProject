@@ -28,3 +28,14 @@ type Query {
   listArticles: ArticlesResult!
   getArticle(id: ID!): ArticleResult!
 }
+
+type Mutation {
+  createArticle(
+    title: String!
+    coverImage: String
+    date: String!
+    author_name: String
+    author_picture: String
+    description: String!
+  ): ArticleResult!
+}
