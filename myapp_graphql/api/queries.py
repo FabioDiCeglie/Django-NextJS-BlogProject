@@ -1,4 +1,5 @@
 from .models import Article
+from ariadne import convert_kwargs_to_snake_case
 
 def listArticles_resolver(obj, info):
     try:
@@ -12,5 +13,20 @@ def listArticles_resolver(obj, info):
         payload = {
             "success": False,
             "errors": [str(error)]
+        }
+    return payload
+
+@convert_kwargs_to_snake_case
+def getArticle_resolver(obj, info, id):
+    try:
+        article = Article.query.get(id)
+        payload = {
+            "success": True,
+            "article": article.to_dict()
+        }
+    except AttributeError:
+        payload = {
+            "success": False,
+            "errors": ["Post item matching {id} not found"]
         }
     return payload
