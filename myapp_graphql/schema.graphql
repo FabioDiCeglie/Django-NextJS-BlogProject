@@ -21,7 +21,7 @@ type ArticleResult {
 type ArticlesResult {
   success: Boolean!
   errors: [String]
-  article: [Article]
+  articles: [Article]
 }
 
 type Query {
