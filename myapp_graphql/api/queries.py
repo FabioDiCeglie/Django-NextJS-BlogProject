@@ -4,7 +4,6 @@ from ariadne import convert_kwargs_to_snake_case
 def listArticles_resolver(obj, info):
     try:
         articles = [article.to_dict() for article in Article.query.all()]
-        print(articles)
         payload = {
             "success": True,
             "articles": articles

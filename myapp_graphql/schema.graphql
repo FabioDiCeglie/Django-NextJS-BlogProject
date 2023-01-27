@@ -33,9 +33,10 @@ type Mutation {
   createArticle(
     title: String!
     coverImage: String
-    date: String!
+    date: String
     author_name: String
     author_picture: String
     description: String!
   ): ArticleResult!
+  updateArticle(id: ID!, title: String, description: String): ArticleResult!
 }
