@@ -3,19 +3,19 @@ from api import app, db
 from ariadne import load_schema_from_path, make_executable_schema, \
     graphql_sync, snake_case_fallback_resolvers, ObjectType
 from ariadne.constants import PLAYGROUND_HTML
-from ariadne import MutationType, QueryType
 from flask import request, jsonify
 from api.queries import listArticles_resolver, getArticle_resolver
-from api.mutations import create_article_resolver, update_article_resolver
+from api.mutations import create_article_resolver, update_article_resolver, delete_post_resolver
 
-query = QueryType()
-mutation = MutationType()
+query = ObjectType("Query")
+mutation = ObjectType("Mutation")
 
 query.set_field("listArticles", listArticles_resolver)
 query.set_field("getArticle", getArticle_resolver)
 
 mutation.set_field("createArticle", create_article_resolver)
 mutation.set_field("updateArticle", update_article_resolver)
+mutation.set_field("deleteArticle", delete_post_resolver)
 
 type_defs = load_schema_from_path("schema.graphql")
 schema = make_executable_schema(
@@ -25,7 +25,6 @@ schema = make_executable_schema(
 @app.route("/graphql", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
-
 
 @app.route("/graphql", methods=["POST"])
 def graphql_server():

@@ -39,4 +39,5 @@ type Mutation {
     description: String!
   ): ArticleResult!
   updateArticle(id: ID!, title: String, description: String): ArticleResult!
+  deleteArticle(id: ID): PostResult!
 }
