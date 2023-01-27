@@ -1,16 +1,8 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import { useCookies } from "react-cookie";
-import { useRouter } from "next/router";
 
 const Intro = () => {
-  const router = useRouter();
   const [token, setToken, removeToken] = useCookies(["mytoken"]);
-  useEffect(() => {
-    if (token["mytoken"]) {
-      router.push("/");
-    }
-  }, [token]);
 
   return (
     <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
