@@ -1,0 +1,30 @@
+schema {
+  query: Query
+}
+
+type Article {
+  id: ID!
+  title: String!
+  coverImage: String
+  date: String!
+  author_name: String
+  author_picture: String
+  description: String!
+}
+
+type ArticleResult {
+  success: Boolean!
+  errors: [String]
+  article: Article
+}
+
+type ArticlesResult {
+  success: Boolean!
+  errors: [String]
+  article: [Article]
+}
+
+type Query {
+  listArticles: ArticlesResult!
+  getPost(id: ID!): ArticleResult!
+}
