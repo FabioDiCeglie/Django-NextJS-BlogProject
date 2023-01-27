@@ -3,16 +3,16 @@ from datetime import date
 from ariadne import convert_kwargs_to_snake_case
 
 from api import db
-from api.models import Article
+from .models import Article
 
 @convert_kwargs_to_snake_case
-def create_article_resolver(obj, info, title, coverImage, author_name, author_description, description):
-    print("HERE")
+def create_article_resolver(obj, info, title, cover_image, author_name, author_picture, description):
+
     try:
         today = date.today()
         article = Article(
-            title=title, coverImage=coverImage, date=today.strftime("%b-%d-%Y"),
-            author_name=author_name, author_description=author_description, description=description,
+            title=title, coverImage=cover_image, date=today.strftime("%b-%d-%Y"),
+            author_name=author_name, author_picture=author_picture, description=description,
 
         )
         db.session.add(article)
@@ -50,7 +50,7 @@ def update_article_resolver(obj, info, id, title, description):
     return payload
 
 @convert_kwargs_to_snake_case
-def delete_post_resolver(obj, info, id):
+def delete_article_resolver(obj, info, id):
     try:
         post = Article.query.get(id)
         db.session.delete(post)

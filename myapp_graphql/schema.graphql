@@ -1,5 +1,6 @@
 schema {
   query: Query
+  mutation: Mutation
 }
 
 type Article {
@@ -39,5 +40,5 @@ type Mutation {
     description: String!
   ): ArticleResult!
   updateArticle(id: ID!, title: String, description: String): ArticleResult!
-  deleteArticle(id: ID): PostResult!
+  deleteArticle(id: ID): ArticleResult!
 }
