@@ -11,10 +11,16 @@ class ArticleType(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     all_articles= graphene.List(ArticleType)
+    article = graphene.Field(ArticleType, id=graphene.String(required=True))
 
     def resolve_all_articles(root, info):
-        # We can easily optimize query count in the resolve method
         return Article.objects.all()
+
+    def resolve_article(root, info, id):
+        try:
+            return Article.objects.get(id=id)
+        except Article.DoesNotExist:
+            return None
 
 
 schema = graphene.Schema(query=Query)
