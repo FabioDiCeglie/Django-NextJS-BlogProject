@@ -1,6 +1,6 @@
 aniso8601==9.0.1
 asgiref==3.6.0
-Django==4.1.5
+Django
 django-cors-headers==3.13.0
 django-environ==0.9.0
 djangorestframework==3.14.0
