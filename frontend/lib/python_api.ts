@@ -1,17 +1,19 @@
 import axios from "axios";
 
+const url = "https://graphql-backend-django.onrender.com";
+
 export const getAllArticles = async () => {
-  const articles = await axios.get("http://localhost:8000/api/articles");
+  const articles = await axios.get("${url}/api/articles");
   return articles.data;
 };
 
 export const getArticle = async (id: string) => {
-  const post = await axios.get(`http://localhost:8000/api/articles/${id}`);
+  const post = await axios.get(`${url}/api/articles/${id}`);
   return post.data;
 };
 
 export const login = async (username: string, password: string) => {
-  const login = await axios.post(`http://localhost:8000/auth/`, {
+  const login = await axios.post(`${url}/auth/`, {
     username,
     password,
   });
@@ -20,7 +22,7 @@ export const login = async (username: string, password: string) => {
 };
 
 export const createUser = async (username: string, password: string) => {
-  const createUser = await axios.post(`http://localhost:8000/api/users/`, {
+  const createUser = await axios.post(`${url}/api/users/`, {
     username,
     password,
   });
