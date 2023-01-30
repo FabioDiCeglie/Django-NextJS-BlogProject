@@ -151,3 +151,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://0.0.0.0:10000"
 ]
+
+STATIC_ROOT = "static/"
