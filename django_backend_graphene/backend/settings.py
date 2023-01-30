@@ -149,5 +149,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "django-next-js-blog-project.vercel.app"
+    "https://graphql-backend-django.onrender.com/auth/"
 ]
