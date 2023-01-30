@@ -9,15 +9,8 @@ type Props = {
 };
 
 const HeroPost = ({ mainArticle }: Props) => {
-  const {
-    title,
-    date,
-    author_picture,
-    author_name,
-    id,
-    coverImage,
-    description,
-  } = mainArticle;
+  const { title, date, author_picture, author_name, id, coverImage } =
+    mainArticle;
 
   return (
     <section>
@@ -40,7 +33,6 @@ const HeroPost = ({ mainArticle }: Props) => {
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{description}</p>
           <Avatar name={author_name} picture={author_picture} />
         </div>
       </div>
