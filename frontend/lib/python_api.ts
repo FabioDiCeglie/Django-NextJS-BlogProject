@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://graphql-backend-django.onrender.com";
+const url = "https://graphql-django-api.onrender.com";
 
 export const getAllArticles = async () => {
   const articles = await axios.get(`${url}/api/articles`);
