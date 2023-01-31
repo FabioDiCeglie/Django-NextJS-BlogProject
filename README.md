@@ -7,5 +7,3 @@ Deployed on Vercel.
 
 - The login functionality is built just for curiosity.
 - The API built with Flask and Ariadne it is built for curiosity and has no effect on the app.
-
-GitHub Project: https://github.com/FabioDiCeglie/Django-NextJS-BlogProject
