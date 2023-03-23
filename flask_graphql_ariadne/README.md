@@ -1,13 +1,13 @@
-## START THE APP
+# START THE APP
 
-## export FLASK_APP=app.py
+# export FLASK_APP=app.py
 
-## flask run
+# flask run
 
-## CREATE TABLE
+# CREATE TABLE
 
-## python
+# python
 
-## >>> from app import db
+# >>> from app import db
 
-## >>> db.create_all()
+# >>> db.create_all()
